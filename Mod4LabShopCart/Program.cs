@@ -26,6 +26,27 @@ namespace Mod4LabShopCart
             return stringArray;
         }
 
+        static bool IsProductInCatalog(string product, string[] catalog)
+        {
+            bool productInCatalog = false;
+            foreach (string value in catalog)
+            {
+               if(product == value)
+                {
+                    productInCatalog = true;
+                    break;
+
+                }
+               else
+               {
+                   productInCatalog = false;
+
+               }
+            }
+
+            return productInCatalog;
+        }
+
         static void Main(string[] args)
         {
         }
