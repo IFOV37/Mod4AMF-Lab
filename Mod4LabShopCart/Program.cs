@@ -49,28 +49,39 @@ namespace Mod4LabShopCart
 
         static void Main(string[] args)
         {
-            string[] catalogArray = ReadCatalogFromFile();
-
-            string[] cart = new string[5];
+            string[] catalogArray = ReadCatalogFromFile();  // read catalog from txt file
             int productsAdded = 0;
             string userInput = "";
             bool inCatalog;
+            string maxProducts = "";
+            int maxProd;
 
-            Console.WriteLine("What products would you like to purchase?  You must enter 5 total.");
+            Console.WriteLine("How many items would you like to purchase?  Set the maximum with this value:");
+            maxProducts = Console.ReadLine();
+            maxProd = int.Parse(maxProducts);       // set loop counter
 
-            while (productsAdded < 5)
+            Console.WriteLine("What products would you like to purchase? Enter quit to end list.");    
+
+            string[] cart = new string[maxProd];    // define available cart size
+
+            while (productsAdded < maxProd)
             {
                 
                 userInput = Console.ReadLine();
+                //string userInputUpper = userInput.ToUpper();
 
-                inCatalog = IsProductInCatalog(userInput, catalogArray);
+                inCatalog = IsProductInCatalog(userInput, catalogArray);        // check to see if product in catalog
 
                 if (inCatalog == true)
                 {
-                    cart[productsAdded] = userInput;
+                    cart[productsAdded] = userInput;        // add to cart
                     Console.WriteLine("$$$ \"" + userInput + "\" has been added to your shopping cart.");
-                    productsAdded++;
+                    productsAdded++;    // increment added
                 }
+                else if(userInput.ToUpper().Equals("QUIT"))
+	            {
+                    break;  // exit loop on quit
+	            }
                 else
                 {
                     Console.WriteLine("Sorry, the product \"" + userInput + "\" is not in the catalog.  Please try another product.");
@@ -79,6 +90,8 @@ namespace Mod4LabShopCart
             }
 
             Console.WriteLine("You are ready to check out! Here are the products in your cart:");
+
+            Array.Sort(cart);
 
             foreach (var item in cart)
             {
