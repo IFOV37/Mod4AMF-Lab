@@ -52,7 +52,40 @@ namespace Mod4LabShopCart
             string[] catalogArray = ReadCatalogFromFile();
 
             string[] cart = new string[5];
+            int productsAdded = 0;
+            string userInput = "";
+            bool inCatalog;
 
+            Console.WriteLine("What products would you like to purchase?  You must enter 5 total.");
+
+            while (productsAdded < 5)
+            {
+                
+                userInput = Console.ReadLine();
+
+                inCatalog = IsProductInCatalog(userInput, catalogArray);
+
+                if (inCatalog == true)
+                {
+                    cart[productsAdded] = userInput;
+                    Console.WriteLine("$$$ \"" + userInput + "\" has been added to your shopping cart.");
+                    productsAdded++;
+                }
+                else
+                {
+                    Console.WriteLine("Sorry, the product \"" + userInput + "\" is not in the catalog.  Please try another product.");
+                }
+
+            }
+
+            Console.WriteLine("You are ready to check out! Here are the products in your cart:");
+
+            foreach (var item in cart)
+            {
+                Console.WriteLine(item);
+            }
+
+            Console.ReadLine();
 
         }
     }
