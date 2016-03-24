@@ -49,6 +49,10 @@ namespace Mod4LabShopCart
 
         static void Main(string[] args)
         {
+            string[] catalogArray = ReadCatalogFromFile();
+
+            string[] cart = new string[5];
+
 
         }
     }
